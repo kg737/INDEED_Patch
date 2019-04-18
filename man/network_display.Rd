@@ -2,7 +2,7 @@
 % Please edit documentation in R/network_display.R
 \name{network_display}
 \alias{network_display}
-\title{Network Visualization for INDEED Partial and Non-Partial Correlation}
+\title{Non-Interactive Network Visualization for INDEED Partial and Non-Partial Correlation}
 \usage{
 network_display(results = NULL, nodesize = "Node_Degree",
   nodecolor = "Activity_Score", edgewidth = "NO", layout = "nice")

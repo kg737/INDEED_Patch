@@ -1,5 +1,5 @@
 ## This file contains several very important functions needed to 
-## properly run select_rho_partial.R, partial_cor.R, and non_partial_cor.R
+## properly run select_rho_partial.R, partial_cor.R, non_partial_cor.R, network_display.R and networkVis.R
  
 
 #' @title Compute the correlation
@@ -255,7 +255,7 @@ loglik_ave <- function(data, theta){
 
 
 
-#' @title Generating a list of errors and thier corresponding \eqn{log(rho)} values
+#' @title Generating a list of errors and their corresponding \eqn{log(rho)} values
 #'
 #' @description This functions output is later used to draw an error curve using cross-validation. 
 #'          This function is used in select_rho_partial.R to help visualize 

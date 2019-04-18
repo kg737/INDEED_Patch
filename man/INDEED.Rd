@@ -40,3 +40,9 @@ A tool to assist in the network visualization of the results from INDEED functio
 and non_partial_cor().
 }
 
+\section{networkVis function}{
+
+An interactive tool to assist in the network visualization of the results from INDEED functions patial_cor()
+and non_partial_cor().
+}
+

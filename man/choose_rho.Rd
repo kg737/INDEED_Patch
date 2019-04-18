@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper_function.R
 \name{choose_rho}
 \alias{choose_rho}
-\title{Generating a list of errors and thier corresponding \eqn{log(rho)} values}
+\title{Generating a list of errors and their corresponding \eqn{log(rho)} values}
 \usage{
 choose_rho(data, n_fold, rho)
 }

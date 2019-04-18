@@ -3,7 +3,9 @@
 #' The size and the color of each node can be adjusted by users to represent either the Node_Degree, Activity_Score, Z_Score, or P_Value.
 #' The color of the edge is based on the binary value of either 1 corresonding to a positive correlation dipicted as green or a 
 #' negative correlation of -1 dipicted as red. The user also has the option of having the width of each edge be proportional to its weight value. 
-#' The layout of the network can also be customized by choosing from the options: 'nice', 'sphere', 'grid', 'star', and circle'. 
+#' The layout of the network can also be customized by choosing from the options: 'nice', 'sphere', 'grid', 'star', and circle'. Nodes can be 
+#' moved and zoomed in on. Each node and edge will display extra information when clicked on. Secondary interactions will be highlighted 
+#' as well when a node is clicked on. 
 #' @param results This is the result from calling either partial_corr() or non_partial_corr()
 #' @param nodesize This parameter determines what the size of each node will represent. The options are 
 #' 'Node_Degree', 'Activity_Score', 'Z_Score', and 'P_Value'. The title of the resulting network will identify which parameter 
@@ -33,12 +35,8 @@ networkVis <- function(results = NULL, nodesize= 'Node_Degree', nodecolor= 'Acti
   
   vis.nodes$shape  <- "dot"  
   vis.nodes$shadow <- TRUE # Nodes will drop shadow
-  
+  # Information that will be displayed when hovering over a node 
   vis.nodes$title <- paste0("<p>", paste('MetID: ', vis.nodes$name), "<br>","<br>", paste('Node Degree: ', vis.nodes$ndegree),"<br>", paste('Activity Score: ', vis.nodes$ascore),"<br>", paste('P-value: ', vis.nodes$pval), "</p>") 
-  
-  
-  
-  
   
   # Setting up the Node Size
   if (missing(nodesize)){
@@ -65,6 +63,7 @@ networkVis <- function(results = NULL, nodesize= 'Node_Degree', nodecolor= 'Acti
     
   }
   
+  # Setting Up Node Color
   if (missing(nodecolor)){
     vis.nodes$color.background <- topo.colors(length(vis.nodes$ascore), alpha=1)
     vis.nodes$color.highlight.background <- topo.colors(length(vis.nodes$ascore), alpha=1)
@@ -110,15 +109,14 @@ networkVis <- function(results = NULL, nodesize= 'Node_Degree', nodecolor= 'Acti
   # Setting up edge width parameter 
   if (edgewidth != "NO" ){vis.links$width <- 15^(wNorm)
   } else {vis.links$width <- 3}
-  
+  # Information that will be displayed when hovering over the edge
   vis.links$title <- paste0("<p>", paste('Edge Weight: ', round(abs(vis.links$weight), digits= 3)), "</p>")
   vis.links$color[vis.links$binary == 1] <- "green"    # line color  
   vis.links$color[vis.links$binary == -1] <- "red" 
   vis.links$arrowStrikethrough <- FALSE
   vis.links$smooth <- TRUE    # should the edges be curved?
   vis.links$shadow <- TRUE    # edge shadow
-  
-  
+
   # Setting up layout of network 
   if (missing(layout)){l <- layout_nicely(net)}
   else if (layout == 'nice'){l <- "layout_nicely"}
@@ -128,17 +126,8 @@ networkVis <- function(results = NULL, nodesize= 'Node_Degree', nodecolor= 'Acti
   else if (layout == 'circle'){l <- "layout_in_circle"
   } else {l <- "layout_nicely"}
   
-  
-  
-  
   lnodes <- data.frame(label= c("High", "Mild", "Low"), shape= c("circle"), color= c("blue", "green", "yellow"))
   ledges <- data.frame(color= c("green", "red"), label= c("Positive Correlation", "Negative Correlation"), font.align= "top", arrows= c("NA", "NA"))
-  
-  
-  
-  # lut <- rev(topo.colors(length(vis.nodes$ascore), alpha=1))
-  # x <- color.bar(lut, min=0, max=max(vis.nodes$ascore), title= toString(nodecolor), nticks=5)
-  
   
   net <- visNetwork(vis.nodes, vis.links, width = "100%", height = "800px", main= "INDEED 2.0", submain= paste("Node size is reprentative of: ", nodesize)) %>%
     visOptions(highlightNearest= TRUE) %>%

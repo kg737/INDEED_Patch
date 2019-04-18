@@ -1,4 +1,4 @@
-#' @title Network Visualization for INDEED Partial and Non-Partial Correlation
+#' @title Non-Interactive Network Visualization for INDEED Partial and Non-Partial Correlation
 
 #' @description A tool to assist in the visualization of the results from INDEED functions patial_cor()
 #' and non_partial_cor(). The size and the color of each node can be adjusted by users to represent either
